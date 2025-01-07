@@ -1,0 +1,136 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <style>
+        #filters{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .filter{
+            text-align: center;
+            margin-right: 2rem;
+            opacity: 0.7;
+        }
+        .filter:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+        .filter p{
+           font-size: 0.5rem;
+            
+        }
+        .fa-solid ,.fa-brands{
+            margin-top: 1rem;
+        }
+        #switch{
+            display: flex;
+            border: 1px solid black;
+            border-radius: 1rem;
+            height: 2rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .taxGst{
+            display: none;
+        }
+    </style>
+<div id="filters">
+    <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>bedding</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>castle</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>mountain</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>swimming</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-city"></i></div>
+        <p>city</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-tractor"></i></div>
+        <p>farms</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-brands fa-discord"></i></div>
+        <p>discord</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-camera-retro"></i></div>
+        <p>camera</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-brands fa-slack"></i></div>
+        <p>slack</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-brands fa-docker"></i></div>
+        <p>docker</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-globe"></i></div>
+        <p>globe</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-business-time"></i></div>
+        <p>bussiness-time</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-brands fa-docker"></i></div>
+        <p>docker</p>
+    </div>
+<div id="switch">
+    <div class="form-check  form-switch form-reverse">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault"> check GTS</label>
+      </div>
+    </div>
+   
+</div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for (let listing of allListings) {%>
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="card col listing-card" >
+                <img src="<%=listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <%= listing.title %> <br>
+                    &#8377;<%= listing.price.toLocaleString("en-IN")%> <br>
+                    <i class="taxGst">+18% GST </i>
+                </p> 
+                </div>
+              </div>
+              <br>
+              <% } %>
+    </div>
+   
+</body>
+<script>
+    let taxSwitch= document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click",()=>{
+        let taxGst=document.getElementsByClassName("taxGst");
+        for (gst of taxGst){
+            if(gst.style.display!="inline"){
+                gst.style.display="inline";
+            }
+            else{
+                gst.style.display="none"
+            }
+        }
+    });
+</script>
